@@ -27,5 +27,9 @@ public class Keyboard {
 	public static void enableRepeatEvents(boolean b) {
 		LWJGLMain.enableRepeatEvents(b);
 	}
+
+	public static boolean isKeyDown(int i) {
+		return LWJGLMain.isKeyDown(i);
+	}
 	
 }

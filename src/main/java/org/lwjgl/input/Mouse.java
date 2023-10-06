@@ -47,5 +47,13 @@ public class Mouse {
 	public static int getEventButton() {
 		return LWJGLMain.mouseGetEventButton();
 	}
+
+	public static boolean isButtonDown(int i) {
+		return LWJGLMain.mouseIsButtonDown(i);
+	}
+
+	public static int getEventDWheel() {
+		return LWJGLMain.mouseGetEventDWheel();
+	}
 	
 }

@@ -5,13 +5,13 @@ import net.PeytonPlayz585.opengl.LWJGLMain;
 
 public class MouseHelper {
 
-	public void grabMouse() {
+	public void grabMouseCursor() {
 		Mouse.setNativeCursor(true);
 		deltaX = 0;
 		deltaY = 0;
 	}
 
-	public void ungrabMouse() {
+	public void ungrabMouseCursor() {
 		Mouse.setCursorPosition(LWJGLMain.getCanvasWidth() / 2, LWJGLMain.getCanvasHeight() / 2);
 		Mouse.setNativeCursor(false);
 	}
