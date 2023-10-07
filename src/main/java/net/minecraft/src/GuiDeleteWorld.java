@@ -1,6 +1,6 @@
 package net.minecraft.src;
 
-import java.io.File;
+import net.PeytonPlayz585.io.File;
 
 public class GuiDeleteWorld extends GuiCreateWorld {
 	public GuiDeleteWorld(GuiScreen var1) {

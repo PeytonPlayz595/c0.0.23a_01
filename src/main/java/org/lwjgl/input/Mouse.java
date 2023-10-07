@@ -13,7 +13,7 @@ public class Mouse {
 	}
 	
 	public static int getX() {
-		return LWJGLMain.mouseGetY();
+		return LWJGLMain.mouseGetX();
 	}
 	
 	public static int getY() {

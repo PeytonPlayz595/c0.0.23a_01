@@ -1,8 +1,11 @@
 package net.minecraft.src;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import net.PeytonPlayz585.io.File;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -53,7 +56,7 @@ public class World implements IBlockAccess {
 			File var4 = new File(var3, "level.dat");
 			if(var4.exists()) {
 				try {
-					NBTTagCompound var5 = CompressedStreamTools.readCompressed(new FileInputStream(var4));
+					NBTTagCompound var5 = (NBTTagCompound) NBTBase.readNamedTag(new DataInputStream(new ByteArrayInputStream(var4.getBytes())));
 					NBTTagCompound var6 = var5.getCompoundTag("Data");
 					return var6;
 				} catch (Exception var7) {
@@ -119,7 +122,7 @@ public class World implements IBlockAccess {
 		this.isNewWorld = !var5.exists();
 		if(var5.exists()) {
 			try {
-				NBTTagCompound var6 = CompressedStreamTools.readCompressed(new FileInputStream(var5));
+				NBTTagCompound var6 = (NBTTagCompound) NBTBase.readNamedTag(new DataInputStream(new ByteArrayInputStream(var5.getBytes())));
 				NBTTagCompound var7 = var6.getCompoundTag("Data");
 				this.randomSeed = var7.getLong("RandomSeed");
 				this.spawnX = var7.getInteger("SpawnX");
@@ -228,7 +231,9 @@ public class World implements IBlockAccess {
 			File var3 = new File(this.saveDirectory, "level.dat_new");
 			File var4 = new File(this.saveDirectory, "level.dat_old");
 			File var5 = new File(this.saveDirectory, "level.dat");
-			CompressedStreamTools.writeCompressed(var2, new FileOutputStream(var3));
+			ByteArrayOutputStream bao = new ByteArrayOutputStream(131072);
+			NBTBase.writeNamedTag(var2, new DataOutputStream(bao));
+			var3.writeBytes(bao.toByteArray());
 			if(var4.exists()) {
 				var4.delete();
 			}

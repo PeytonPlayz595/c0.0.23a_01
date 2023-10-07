@@ -1,12 +1,12 @@
 package net.minecraft.src;
 
-import java.io.File;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
+import net.PeytonPlayz585.io.File;
 import net.PeytonPlayz585.opengl.LWJGLMain;
 
 public class Minecraft implements Runnable {
@@ -69,7 +69,7 @@ public class Minecraft implements Runnable {
 
 	public void startGame() throws LWJGLException {
 		this.mcDataDir = getMinecraftDir();
-		this.gameSettings = new GameSettings(this, this.mcDataDir);
+		this.gameSettings = new GameSettings(this);
 		this.renderEngine = new RenderEngine(this.gameSettings);
 		this.fontRenderer = new FontRenderer(this.gameSettings, "/default.png", this.renderEngine);
 		this.loadScreen();

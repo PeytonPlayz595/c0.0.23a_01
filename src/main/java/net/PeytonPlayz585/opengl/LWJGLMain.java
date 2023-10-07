@@ -57,6 +57,7 @@ import org.teavm.jso.webgl.WebGLUniformLocation;
 import org.teavm.jso.websocket.CloseEvent;
 import org.teavm.jso.websocket.WebSocket;
 
+import net.PeytonPlayz585.io.IndexedDBFilesystem;
 import net.PeytonPlayz585.minecraft.AssetRepository;
 import net.PeytonPlayz585.minecraft.Base64;
 import net.minecraft.src.MathHelper;
@@ -308,6 +309,8 @@ public class LWJGLMain {
 		});
 		//onBeforeCloseRegister();
 		initFileChooser();
+		
+		IndexedDBFilesystem.OpenState st = IndexedDBFilesystem.initialize();
 		
 		downloadAssetPack(assetPackageURI);
 		
@@ -1870,80 +1873,80 @@ public class LWJGLMain {
 	@JSBody(params = { "obj" }, script = "return typeof obj === \"string\";")
 	private static native boolean isString(JSObject obj);
 	
-//	public static final boolean fileExists(String path) {
-//		return IndexedDBFilesystem.fileExists(path);
-//	}
-//	
-//	public static final boolean directoryExists(String path) {
-//		return IndexedDBFilesystem.directoryExists(path);
-//	}
-//	
-//	public static final boolean pathExists(String path) {
-//		return IndexedDBFilesystem.pathExists(path);
-//	}
-//	
-//	public static final void writeFile(String path, byte[] data) {
-//		IndexedDBFilesystem.writeFile(path, data);
-//	}
-//	
-//	public static final byte[] readFile(String path) {
-//		return IndexedDBFilesystem.readFile(path);
-//	}
-//	
-//	public static final long getLastModified(String path) {
-//		return IndexedDBFilesystem.getLastModified(path);
-//	}
-//	
-//	public static final int getFileSize(String path) {
-//		return IndexedDBFilesystem.getFileSize(path);
-//	}
-//	
-//	public static final void renameFile(String oldPath, String newPath) {
-//		IndexedDBFilesystem.renameFile(oldPath, newPath);
-//	}
-//	
-//	public static final void copyFile(String oldPath, String newPath) {
-//		IndexedDBFilesystem.copyFile(oldPath, newPath);
-//	}
-//	
-//	public static final void deleteFile(String path) {
-//		IndexedDBFilesystem.deleteFile(path);
-//	}
-//
-//	public static final Collection<FileEntry> listFiles(String path, boolean listDirs, boolean recursiveDirs) {
-//		return IndexedDBFilesystem.listFiles(path, listDirs, recursiveDirs);
-//	}
-//	
-//	public static final Collection<FileEntry> listFilesAndDirectories(String path) {
-//		return listFiles(path, true, false);
-//	}
-//	
-//	public static final Collection<FileEntry> listFilesRecursive(String path) {
-//		return listFiles(path, false, true);
-//	}
+	public static final boolean fileExists(String path) {
+		return IndexedDBFilesystem.fileExists(path);
+	}
+	
+	public static final boolean directoryExists(String path) {
+		return IndexedDBFilesystem.directoryExists(path);
+	}
+	
+	public static final boolean pathExists(String path) {
+		return IndexedDBFilesystem.pathExists(path);
+	}
+	
+	public static final void writeFile(String path, byte[] data) {
+		IndexedDBFilesystem.writeFile(path, data);
+	}
+	
+	public static final byte[] readFile(String path) {
+		return IndexedDBFilesystem.readFile(path);
+	}
+	
+	public static final long getLastModified(String path) {
+		return IndexedDBFilesystem.getLastModified(path);
+	}
+	
+	public static final int getFileSize(String path) {
+		return IndexedDBFilesystem.getFileSize(path);
+	}
+	
+	public static final void renameFile(String oldPath, String newPath) {
+		IndexedDBFilesystem.renameFile(oldPath, newPath);
+	}
+	
+	public static final void copyFile(String oldPath, String newPath) {
+		IndexedDBFilesystem.copyFile(oldPath, newPath);
+	}
+	
+	public static final void deleteFile(String path) {
+		IndexedDBFilesystem.deleteFile(path);
+	}
 
-//	public static class FileEntry {
-//		
-//		public final String path;
-//		public final boolean isDirectory;
-//		public final long lastModified;
-//		
-//		public FileEntry(String path, boolean isDirectory, long lastModified) {
-//			this.path = path;
-//			this.isDirectory = isDirectory;
-//			this.lastModified = lastModified;
-//		}
-//		
-//		public String getName() {
-//			int i = path.indexOf('/');
-//			if(i >= 0) {
-//				return path.substring(i + 1);
-//			}else {
-//				return path;
-//			}
-//		}
-//		
-//	}
+	public static final Collection<FileEntry> listFiles(String path, boolean listDirs, boolean recursiveDirs) {
+		return IndexedDBFilesystem.listFiles(path, listDirs, recursiveDirs);
+	}
+	
+	public static final Collection<FileEntry> listFilesAndDirectories(String path) {
+		return listFiles(path, true, false);
+	}
+	
+	public static final Collection<FileEntry> listFilesRecursive(String path) {
+		return listFiles(path, false, true);
+	}
+
+	public static class FileEntry {
+		
+		public final String path;
+		public final boolean isDirectory;
+		public final long lastModified;
+		
+		public FileEntry(String path, boolean isDirectory, long lastModified) {
+			this.path = path;
+			this.isDirectory = isDirectory;
+			this.lastModified = lastModified;
+		}
+		
+		public String getName() {
+			int i = path.indexOf('/');
+			if(i >= 0) {
+				return path.substring(i + 1);
+			}else {
+				return path;
+			}
+		}
+		
+	}
 	
 	private static String stripPath(String str) {
 		if(str.startsWith("/")) {
@@ -1955,12 +1958,12 @@ public class LWJGLMain {
 		return str;
 	}
 
-//	@JSBody(params = { "name", "cvs" }, script = "var a=document.createElement(\"a\");a.href=URL.createObjectURL(new Blob([cvs],{type:\"application/octet-stream\"}));a.download=name;a.click();URL.revokeObjectURL(a.href);")
-//	private static native void downloadFile0(String name, ArrayBuffer cvs);
-//	
-//	public static final void downloadFile(String filename, byte[] data) {
-//		Uint8Array b = Uint8Array.create(data.length);
-//		b.set(data);
-//		downloadFile0(filename, b.getBuffer());
-//	}
+	@JSBody(params = { "name", "cvs" }, script = "var a=document.createElement(\"a\");a.href=URL.createObjectURL(new Blob([cvs],{type:\"application/octet-stream\"}));a.download=name;a.click();URL.revokeObjectURL(a.href);")
+	private static native void downloadFile0(String name, ArrayBuffer cvs);
+	
+	public static final void downloadFile(String filename, byte[] data) {
+		Uint8Array b = Uint8Array.create(data.length);
+		b.set(data);
+		downloadFile0(filename, b.getBuffer());
+	}
 }

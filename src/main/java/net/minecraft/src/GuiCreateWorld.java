@@ -1,6 +1,6 @@
 package net.minecraft.src;
 
-import java.io.File;
+import net.PeytonPlayz585.io.File;
 
 public class GuiCreateWorld extends GuiScreen {
 	protected GuiScreen parentGuiScreen;

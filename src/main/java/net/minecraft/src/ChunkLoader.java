@@ -1,9 +1,9 @@
 package net.minecraft.src;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.*;
 import java.util.Iterator;
+
+import net.PeytonPlayz585.io.File;
 
 public class ChunkLoader implements IChunkLoader {
 	private File saveDir;
@@ -44,8 +44,7 @@ public class ChunkLoader implements IChunkLoader {
 		File var4 = this.chunkFileForXZ(var2, var3);
 		if(var4 != null && var4.exists()) {
 			try {
-				FileInputStream var5 = new FileInputStream(var4);
-				NBTTagCompound var6 = CompressedStreamTools.readCompressed(var5);
+				NBTTagCompound var6 = (NBTTagCompound) NBTBase.readNamedTag(new DataInputStream(new ByteArrayInputStream(var4.getBytes())));
 				return loadChunkIntoWorldFromCompound(var1, var6.getCompoundTag("Level"));
 			} catch (Exception var7) {
 				var7.printStackTrace();
@@ -57,29 +56,17 @@ public class ChunkLoader implements IChunkLoader {
 
 	public void saveChunk(World var1, Chunk var2) {
 		File var3 = this.chunkFileForXZ(var2.xPosition, var2.zPosition);
-		if(var3.exists()) {
-			var1.setSizeOnDisk -= var3.length();
-		}
-
+		NBTTagCompound toSave = new NBTTagCompound();
+		storeChunkInCompound(var2, var1, toSave);
+		ByteArrayOutputStream bao = new ByteArrayOutputStream(131072);
 		try {
-			File var4 = new File(this.saveDir, "tmp_chunk.dat");
-			FileOutputStream var5 = new FileOutputStream(var4);
-			NBTTagCompound var6 = new NBTTagCompound();
-			NBTTagCompound var7 = new NBTTagCompound();
-			var6.setTag("Level", var7);
-			this.storeChunkInCompound(var2, var1, var7);
-			CompressedStreamTools.writeCompressed(var6, var5);
-			var5.close();
-			if(var3.exists()) {
-				var3.delete();
-			}
-
-			var4.renameTo(var3);
-			var1.setSizeOnDisk += var3.length();
-		} catch (Exception var8) {
-			var8.printStackTrace();
+			NBTBase.writeNamedTag(toSave, new DataOutputStream(bao));
+		} catch (IOException e) {
+			System.err.println("Failed to serialize chunk at [" + var2.xPosition + ", " + var2.zPosition + "] to byte array");
+			e.printStackTrace();
+			return;
 		}
-
+		var3.writeBytes(bao.toByteArray());
 	}
 
 	public void storeChunkInCompound(Chunk var1, World var2, NBTTagCompound var3) {
