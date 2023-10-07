@@ -6,6 +6,8 @@ import java.util.Random;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import net.PeytonPlayz585.opengl.LWJGLMain;
+
 public class GuiIngame extends Gui {
 	private static RenderItem itemRenderer = new RenderItem();
 	private List chatMessageList = new ArrayList();
@@ -138,9 +140,9 @@ public class GuiIngame extends Gui {
 			var8.drawStringWithShadow(this.mc.debugInfoRenders(), 2, 12, 16777215);
 			var8.drawStringWithShadow(this.mc.getEntityDebug(), 2, 22, 16777215);
 			var8.drawStringWithShadow(this.mc.debugInfoEntities(), 2, 32, 16777215);
-			long var22 = Runtime.getRuntime().maxMemory();
-			long var26 = Runtime.getRuntime().totalMemory();
-			long var27 = Runtime.getRuntime().freeMemory();
+			long var22 = LWJGLMain.maxMemory();
+			long var26 = LWJGLMain.totalMemory();
+			long var27 = LWJGLMain.freeMemory();
 			long var19 = var26 - var27;
 			String var21 = "Used memory: " + var19 * 100L / var22 + "% (" + var19 / 1024L / 1024L + "MB) of " + var22 / 1024L / 1024L + "MB";
 			this.drawString(var8, var21, var6 - var8.getStringWidth(var21) - 2, 2, 14737632);

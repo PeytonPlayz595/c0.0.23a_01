@@ -2,7 +2,6 @@ package net.PeytonPlayz585;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.UUID;
 
 import org.lwjgl.opengl.Display;
 import org.teavm.jso.JSBody;
@@ -13,7 +12,7 @@ import net.PeytonPlayz585.opengl.LWJGLMain;
 import net.minecraft.src.Minecraft;
 import net.minecraft.src.Session;
 
-public class Main {
+public class Client {
 	
 	public static HTMLElement rootElement = null;
 	public static Minecraft instance = null;
@@ -41,8 +40,8 @@ public class Main {
 	
 	public static void run0() {
 		instance = new Minecraft(Display.getDisplayMode().getWidth(), Display.getDisplayMode().getHeight(), false);
-		instance.session = new Session("Player", UUID.randomUUID().toString());
-		instance.session.mpPassParameter = UUID.randomUUID().toString();
+		instance.session = new Session("Player", UUID.randomUUID());
+		instance.session.mpPassParameter = UUID.randomUUID();
 		mcThread = new Thread(instance, "Minecraft main thread");
 		mcThread.start();
 	}

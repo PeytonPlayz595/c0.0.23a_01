@@ -27,7 +27,6 @@ public class Minecraft implements Runnable {
 	public GuiScreen currentScreen = null;
 	public LoadingScreenRenderer loadingScreen = new LoadingScreenRenderer(this);
 	public EntityRenderer entityRenderer = new EntityRenderer(this);
-	private ThreadDownloadResources downloadResourcesThread;
 	private int ticksRan = 0;
 	private int leftClickCounter = 0;
 	private int tempDisplayWidth;
@@ -96,19 +95,10 @@ public class Minecraft implements Runnable {
 		this.renderEngine.registerTextureFX(new TextureLavaFlowFX());
 		this.renderEngine.registerTextureFX(new TextureFlamesFX(0));
 		this.renderEngine.registerTextureFX(new TextureFlamesFX(1));
-		this.renderEngine.registerTextureFX(new TextureGearsFX(0));
-		this.renderEngine.registerTextureFX(new TextureGearsFX(1));
 		this.renderGlobal = new RenderGlobal(this, this.renderEngine);
 		GL11.glViewport(0, 0, this.displayWidth, this.displayHeight);
 		this.displayGuiScreen(new GuiMainMenu());
 		this.effectRenderer = new EffectRenderer(this.theWorld, this.renderEngine);
-
-		try {
-			this.downloadResourcesThread = new ThreadDownloadResources(this.mcDataDir, this);
-			this.downloadResourcesThread.start();
-		} catch (Exception var3) {
-		}
-
 		this.checkGLError("Post startup");
 		this.ingameGUI = new GuiIngame(this);
 		this.playerController.init();
@@ -163,12 +153,7 @@ public class Minecraft implements Runnable {
 			var2 = new File(var1, '.' + var0 + '/');
 			break;
 		case 3:
-			String var3 = System.getenv("APPDATA");
-			if(var3 != null) {
-				var2 = new File(var3, "." + var0 + '/');
-			} else {
-				var2 = new File(var1, '.' + var0 + '/');
-			}
+			var2 = new File(var1, '.' + var0 + '/');
 			break;
 		case 4:
 			var2 = new File(var1, "Library/Application Support/" + var0);
@@ -223,19 +208,11 @@ public class Minecraft implements Runnable {
 			System.out.println("########## GL ERROR ##########");
 			System.out.println("@ " + var1);
 			System.out.println(var2 + ": " + var3);
-			System.exit(0);
 		}
 
 	}
 
 	public void shutdownMinecraftApplet() {
-		try {
-			if(this.downloadResourcesThread != null) {
-				this.downloadResourcesThread.closeMinecraft();
-			}
-		} catch (Exception var8) {
-		}
-		
 		System.out.println("Stopping!");
 		this.changeWorld1((World)null);
 		GLAllocation.deleteTexturesAndDisplayLists();

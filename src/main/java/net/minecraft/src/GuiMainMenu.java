@@ -2,6 +2,8 @@ package net.minecraft.src;
 
 import org.lwjgl.opengl.GL11;
 
+import net.PeytonPlayz585.opengl.LWJGLMain;
+
 public class GuiMainMenu extends GuiScreen {
 	private float updateCounter = 0.0F;
 	private String[] splashes = new String[]{"Pre-beta!", "As seen on TV!", "Awesome!", "100% pure!", "May contain nuts!", "Better than Prey!", "More polygons!", "Sexy!", "Limited edition!", "Flashing letters!", "Made by Notch!", "Coming soon!", "Best in class!", "When it\'s finished!", "Absolutely dragon free!", "Excitement!", "More than 5000 sold!", "One of a kind!", "700+ hits on YouTube!", "Indev!", "Spiders everywhere!", "Check it out!", "Holy cow, man!", "It\'s a game!", "Made in Sweden!", "Uses LWJGL!", "Reticulating splines!", "Minecraft!", "Yaaay!", "Alpha version!", "Singleplayer!", "Keyboard compatible!", "Undocumented!", "Ingots!", "Exploding creepers!", "That\'s not a moon!", "l33t!", "Create!", "Survive!", "Dungeon!", "Exclusive!", "The bee\'s knees!", "Down with O.P.P.!", "Closed source!", "Classy!", "Wow!", "Not on steam!", "9.95 euro!", "Half price!", "Oh man!", "Check it out!", "Awesome community!", "Pixels!", "Teetsuuuuoooo!", "Kaaneeeedaaaa!", "Now with difficulty!", "Enhanced!", "90% bug free!", "Pretty!", "12 herbs and spices!", "Fat free!", "Absolutely no memes!", "Free dental!", "Ask your doctor!", "Minors welcome!", "Cloud computing!", "Legal in Finland!", "Hard to label!", "Technically good!", "Bringing home the bacon!", "Indie!", "GOTY!", "Ceci n\'est pas une title screen!", "Euclidian!", "Now in 3D!", "Inspirational!", "Herregud!", "Complex cellular automata!", "Yes, sir!", "Played by cowboys!", "OpenGL 1.1!", "Thousands of colors!", "Try it!", "Age of Wonders is better!", "Try the mushroom stew!", "Sensational!", "Hot tamale, hot hot tamale!", "Play him off, keyboard cat!", "Guaranteed!", "Macroscopic!", "Bring it on!", "Random splash!", "Call your mother!", "Monster infighting!", "Loved by millions!", "Ultimate edition!", "Freaky!", "You\'ve got a brand new key!", "Water proof!", "Uninflammable!", "Whoa, dude!", "All inclusive!", "Tell your friends!", "NP is not in P!", "Notch <3 Ez!", "Music by C418!"};
@@ -58,9 +60,9 @@ public class GuiMainMenu extends GuiScreen {
 		GL11.glPopMatrix();
 		String var8 = "Copyright Mojang Specifications. Do not distribute.";
 		this.drawString(this.fontRenderer, var8, this.width - this.fontRenderer.getStringWidth(var8) - 2, this.height - 10, 16777215);
-		long var9 = Runtime.getRuntime().maxMemory();
-		long var11 = Runtime.getRuntime().totalMemory();
-		long var13 = Runtime.getRuntime().freeMemory();
+		long var9 = LWJGLMain.maxMemory();
+		long var11 = LWJGLMain.totalMemory();
+		long var13 = LWJGLMain.freeMemory();
 		long var15 = var9 - var13;
 		var8 = "Free memory: " + var15 * 100L / var9 + "% of " + var9 / 1024L / 1024L + "MB";
 		this.drawString(this.fontRenderer, var8, this.width - this.fontRenderer.getStringWidth(var8) - 2, 2, 8421504);
