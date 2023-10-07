@@ -55,12 +55,12 @@ public class GameSettings {
 	public void setOptionFloatValue(int var1, int var2) {
 		if(var1 == 0) {
 			this.music = !this.music;
-			this.mc.sndManager.onSoundOptionsChanged();
+			//this.mc.sndManager.onSoundOptionsChanged();
 		}
 
 		if(var1 == 1) {
 			this.sound = !this.sound;
-			this.mc.sndManager.onSoundOptionsChanged();
+			//this.mc.sndManager.onSoundOptionsChanged();
 		}
 
 		if(var1 == 2) {

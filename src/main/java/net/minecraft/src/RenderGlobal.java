@@ -1023,7 +1023,7 @@ public class RenderGlobal implements IWorldAccess {
 	}
 
 	public void playSound(String var1, double var2, double var4, double var6, float var8, float var9) {
-		this.mc.sndManager.playSound(var1, (float)var2, (float)var4, (float)var6, var8, var9);
+		//this.mc.sndManager.playSound(var1, (float)var2, (float)var4, (float)var6, var8, var9);
 	}
 
 	public void spawnParticle(String var1, double var2, double var4, double var6, double var8, double var10, double var12) {

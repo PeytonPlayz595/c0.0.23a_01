@@ -39,7 +39,7 @@ public class Minecraft implements Runnable {
 	public ModelBiped playerModelBiped = new ModelBiped(0.0F);
 	public MovingObjectPosition objectMouseOver = null;
 	public GameSettings gameSettings;
-	public SoundManager sndManager = new SoundManager();
+	//public SoundManager sndManager = new SoundManager();
 	public MouseHelper mouseHelper;
 	public File mcDataDir;
 	public static long[] tickTimes = new long[512];
@@ -89,7 +89,7 @@ public class Minecraft implements Runnable {
 		GL11.glLoadIdentity();
 		GL11.glMatrixMode(GL11.GL_MODELVIEW);
 		this.checkGLError("Startup");
-		this.sndManager.loadSoundSettings(this.gameSettings);
+		//this.sndManager.loadSoundSettings(this.gameSettings);
 		this.renderEngine.registerTextureFX(this.textureLavaFX);
 		this.renderEngine.registerTextureFX(this.textureWaterFX);
 		this.renderEngine.registerTextureFX(new TextureWaterFlowFX());
@@ -239,7 +239,7 @@ public class Minecraft implements Runnable {
 		System.out.println("Stopping!");
 		this.changeWorld1((World)null);
 		GLAllocation.deleteTexturesAndDisplayLists();
-		this.sndManager.closeMinecraft();
+		//this.sndManager.closeMinecraft();
 
 		System.gc();
 	}
@@ -281,7 +281,7 @@ public class Minecraft implements Runnable {
 					this.timer.renderPartialTicks = 1.0F;
 				}
 
-				this.sndManager.setListener(this.thePlayer, this.timer.renderPartialTicks);
+				//this.sndManager.setListener(this.thePlayer, this.timer.renderPartialTicks);
 				GL11.glEnable(GL11.GL_TEXTURE_2D);
 				if(this.theWorld != null) {
 					while(this.theWorld.updatingLighting()) {
@@ -832,11 +832,11 @@ public class Minecraft implements Runnable {
 		String var4 = var1.substring(0, var3);
 		var1 = var1.substring(var3 + 1);
 		if(var4.equalsIgnoreCase("sound")) {
-			this.sndManager.addSound(var1, var2);
+			//this.sndManager.addSound(var1, var2);
 		} else if(var4.equalsIgnoreCase("newsound")) {
-			this.sndManager.addSound(var1, var2);
+			//this.sndManager.addSound(var1, var2);
 		} else if(var4.equalsIgnoreCase("music")) {
-			this.sndManager.addMusic(var1, var2);
+			//this.sndManager.addMusic(var1, var2);
 		}
 
 	}
