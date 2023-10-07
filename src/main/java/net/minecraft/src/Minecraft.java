@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.PeytonPlayz585.opengl.LWJGLMain;
 
-public abstract class Minecraft implements Runnable {
+public class Minecraft implements Runnable {
 	public PlayerController playerController = new PlayerControllerSP(this);
 	private boolean fullscreen = false;
 	public int displayWidth;
@@ -21,7 +21,6 @@ public abstract class Minecraft implements Runnable {
 	public EffectRenderer effectRenderer;
 	public Session session = null;
 	public String minecraftUri;
-	public boolean appletMode = true;
 	public volatile boolean isGamePaused = false;
 	public RenderEngine renderEngine;
 	public FontRenderer fontRenderer;
@@ -65,8 +64,6 @@ public abstract class Minecraft implements Runnable {
 		this.displayHeight = var5;
 		this.fullscreen = var6;
 	}
-
-	public abstract void displayUnexpectedThrowable(UnexpectedThrowable var1);
 
 	public void setServer(String var1, int var2) {
 	}
@@ -254,7 +251,7 @@ public abstract class Minecraft implements Runnable {
 			this.startGame();
 		} catch (Exception var10) {
 			var10.printStackTrace();
-			this.displayUnexpectedThrowable(new UnexpectedThrowable("Failed to start game", var10));
+			new UnexpectedThrowable("Failed to start game", var10);
 			return;
 		}
 
@@ -334,7 +331,7 @@ public abstract class Minecraft implements Runnable {
 		} catch (MinecraftError var11) {
 		} catch (Exception var12) {
 			var12.printStackTrace();
-			this.displayUnexpectedThrowable(new UnexpectedThrowable("Unexpected error", var12));
+			new UnexpectedThrowable("Unexpected error", var12);
 		} finally {
 			this.shutdownMinecraftApplet();
 		}

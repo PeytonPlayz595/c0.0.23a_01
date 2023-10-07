@@ -1,20 +1,13 @@
 package net.minecraft.src;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Panel;
-import java.awt.TextArea;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.lwjgl.opengl.GL11;
 
-public class PanelCrashReport extends Panel {
+public class PanelCrashReport {
 	public PanelCrashReport(UnexpectedThrowable var1) {
-		this.setBackground(new Color(3028036));
-		this.setLayout(new BorderLayout());
 		StringWriter var2 = new StringWriter();
 		var1.exception.printStackTrace(new PrintWriter(var2));
 		String var3 = var2.toString();
@@ -73,12 +66,5 @@ public class PanelCrashReport extends Panel {
 		var6 = var6 + "--- END ERROR REPORT " + Integer.toHexString(var6.hashCode()) + " ----------\n";
 		var6 = var6 + "\n";
 		var6 = var6 + "\n";
-		TextArea var7 = new TextArea(var6, 0, 0, 1);
-		var7.setFont(new Font("Monospaced", 0, 12));
-		this.add(new CanvasMojangLogo(), "North");
-		this.add(new CanvasCrashReport(80), "East");
-		this.add(new CanvasCrashReport(80), "West");
-		this.add(new CanvasCrashReport(100), "South");
-		this.add(var7, "Center");
 	}
 }
