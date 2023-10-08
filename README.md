@@ -1,26 +1,24 @@
-# Infdev-20100630-1 WebGL
-Minecraft Infdev-20100630-1 WebGL is a full WebGL port of Minecraft Infdev-20100630-1 that can be played in the browser.
+# Infdev-20100630-1-WebGL
+This project aims to be a 1:1 replica of Minecraft Infdev 20100630-1 ported to the browser using WebGL and TeaVM.
+
+## Contributing
+Feel free to contribute, just open a pull request and DM on Discord (peytonplayz585) because I probably won't check pull requests that often.
+
+## Bugs
+
+## Pros & Cons
+
+Pros:
+- Can be played in the browser (No Download)
+- ITS FREE!
+- More features
+
+Cons:
+- EXTREMELY laggy
+- It's pirated
+- Has bugs & some features may have to be removed for performance issues
+
 <br>
 
 fuck microsoft :trollface:
 <br>
-also Winix, fuck off
-
-## Project Removal
-This project is just for fun, if it has to be taken down for any legal reasons email me at PeytonPlayz585@gmail.com
-
-## How to play?
-
-## Contributing
-
-## Bug
-## Controls
-## Pros & Cons
-
-Pros:
--
-
-Cons:
-- 
-
-## Screenshots
