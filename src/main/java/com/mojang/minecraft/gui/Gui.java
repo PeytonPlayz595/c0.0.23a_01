@@ -35,14 +35,17 @@ public class Gui {
 		float var13 = (float)(var5 & 255) / 255.0F;
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		GL11.glBegin(GL11.GL_QUADS);
-		GL11.glColor4f(var7, var8, var12, var6);
-		GL11.glVertex2f((float)var2, (float)var1);
-		GL11.glVertex2f((float)var0, (float)var1);
-		GL11.glColor4f(var10, var11, var13, var9);
-		GL11.glVertex2f((float)var0, (float)var3);
-		GL11.glVertex2f((float)var2, (float)var3);
+
+		Tesselator tesselator = Tesselator.instance;
+		tesselator.begin(GL11.GL_QUADS);
+		tesselator.setColorRGBA_F(var7, var8, var12, var6);
+		tesselator.vertex((float)var2, (float)var1);
+		tesselator.vertex((float)var0, (float)var1);
+		tesselator.setColorRGBA_F(var10, var11, var13, var9);
+		tesselator.vertex((float)var0, (float)var3);
+		tesselator.vertex((float)var2, (float)var3);
 		GL11.glEnd();
+
 		GL11.glDisable(GL11.GL_BLEND);
 	}
 

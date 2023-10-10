@@ -378,30 +378,33 @@ public final class LevelRenderer {
 			}
 		}
 
-		GL11.glBegin(GL11.GL_LINE_STRIP);
-		GL11.glVertex3f(var2, var3, var4);
-		GL11.glVertex3f(var2 + 1.0F, var3, var4);
-		GL11.glVertex3f(var2 + 1.0F, var3, var4 + 1.0F);
-		GL11.glVertex3f(var2, var3, var4 + 1.0F);
-		GL11.glVertex3f(var2, var3, var4);
-		GL11.glEnd();
-		GL11.glBegin(GL11.GL_LINE_STRIP);
-		GL11.glVertex3f(var2, var3 + 1.0F, var4);
-		GL11.glVertex3f(var2 + 1.0F, var3 + 1.0F, var4);
-		GL11.glVertex3f(var2 + 1.0F, var3 + 1.0F, var4 + 1.0F);
-		GL11.glVertex3f(var2, var3 + 1.0F, var4 + 1.0F);
-		GL11.glVertex3f(var2, var3 + 1.0F, var4);
-		GL11.glEnd();
-		GL11.glBegin(GL11.GL_LINES);
-		GL11.glVertex3f(var2, var3, var4);
-		GL11.glVertex3f(var2, var3 + 1.0F, var4);
-		GL11.glVertex3f(var2 + 1.0F, var3, var4);
-		GL11.glVertex3f(var2 + 1.0F, var3 + 1.0F, var4);
-		GL11.glVertex3f(var2 + 1.0F, var3, var4 + 1.0F);
-		GL11.glVertex3f(var2 + 1.0F, var3 + 1.0F, var4 + 1.0F);
-		GL11.glVertex3f(var2, var3, var4 + 1.0F);
-		GL11.glVertex3f(var2, var3 + 1.0F, var4 + 1.0F);
-		GL11.glEnd();
+		Tesselator tesselator = Tesselator.instance;
+		tesselator.begin(GL11.GL_LINE_STRIP);
+		tesselator.vertex(var2, var3, var4);
+		tesselator.vertex(var2 + 1.0F, var3, var4);
+		tesselator.vertex(var2 + 1.0F, var3, var4 + 1.0F);
+		tesselator.vertex(var2, var3, var4 + 1.0F);
+		tesselator.vertex(var2, var3, var4);
+		tesselator.end();
+
+		tesselator.begin(GL11.GL_LINE_STRIP);
+		tesselator.vertex(var2, var3 + 1.0F, var4);
+		tesselator.vertex(var2 + 1.0F, var3 + 1.0F, var4);
+		tesselator.vertex(var2 + 1.0F, var3 + 1.0F, var4 + 1.0F);
+		tesselator.vertex(var2, var3 + 1.0F, var4 + 1.0F);
+		tesselator.vertex(var2, var3 + 1.0F, var4);
+		tesselator.end();
+
+		tesselator.begin(GL11.GL_LINES);
+		tesselator.vertex(var2, var3, var4);
+		tesselator.vertex(var2, var3 + 1.0F, var4);
+		tesselator.vertex(var2 + 1.0F, var3, var4);
+		tesselator.vertex(var2 + 1.0F, var3 + 1.0F, var4);
+		tesselator.vertex(var2 + 1.0F, var3, var4 + 1.0F);
+		tesselator.vertex(var2 + 1.0F, var3 + 1.0F, var4 + 1.0F);
+		tesselator.vertex(var2, var3, var4 + 1.0F);
+		tesselator.vertex(var2, var3 + 1.0F, var4 + 1.0F);
+		tesselator.end();
 		GL11.glDisable(GL11.GL_BLEND);
 	}
 

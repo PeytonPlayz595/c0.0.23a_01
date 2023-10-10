@@ -13,7 +13,11 @@ public class Display {
 		LWJGLMain.updateDisplay();
 	}
 
-	public static HTMLCanvasElement getDisplayMode() {
-		return LWJGLMain.canvas;
+	public static int getWidth() {
+		return LWJGLMain.getCanvasWidth();
+	}
+
+	public static int getHeight() {
+		return LWJGLMain.getCanvasHeight();
 	}
 }
