@@ -34,7 +34,7 @@ public class Textures {
 
 	public final int addTexture(BufferedImage var1) {
 		this.idBuffer.clear();
-		GL11.glGenTextures(this.idBuffer);
+		GL11.glGenTextures();
 		int var2 = this.idBuffer.get(0);
 		GL11.glBindTexture(GL11.GL_TEXTURE_2D, var2);
 		GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST);

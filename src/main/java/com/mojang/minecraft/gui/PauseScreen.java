@@ -12,13 +12,6 @@ public final class PauseScreen extends Screen {
 			((Button)this.buttons.get(2)).enabled = false;
 			((Button)this.buttons.get(3)).enabled = false;
 		}
-
-		if(this.minecraft.connectionManager != null) {
-			((Button)this.buttons.get(1)).enabled = false;
-			((Button)this.buttons.get(2)).enabled = false;
-			((Button)this.buttons.get(3)).enabled = false;
-		}
-
 	}
 
 	protected final void buttonClicked(Button var1) {

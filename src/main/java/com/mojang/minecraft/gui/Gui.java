@@ -38,13 +38,13 @@ public class Gui {
 
 		Tesselator tesselator = Tesselator.instance;
 		tesselator.begin(GL11.GL_QUADS);
-		tesselator.setColorRGBA_F(var7, var8, var12, var6);
-		tesselator.vertex((float)var2, (float)var1);
-		tesselator.vertex((float)var0, (float)var1);
-		tesselator.setColorRGBA_F(var10, var11, var13, var9);
-		tesselator.vertex((float)var0, (float)var3);
-		tesselator.vertex((float)var2, (float)var3);
-		GL11.glEnd();
+		tesselator.color(var7, var8, var12, var6);
+		tesselator.setTextureUV((float)var2, (float)var1);
+		tesselator.setTextureUV((float)var0, (float)var1);
+		tesselator.color(var10, var11, var13, var9);
+		tesselator.setTextureUV((float)var0, (float)var3);
+		tesselator.setTextureUV((float)var2, (float)var3);
+		tesselator.end();
 
 		GL11.glDisable(GL11.GL_BLEND);
 	}

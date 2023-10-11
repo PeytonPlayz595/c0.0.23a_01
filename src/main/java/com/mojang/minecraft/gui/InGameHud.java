@@ -3,8 +3,6 @@ package com.mojang.minecraft.gui;
 import com.mojang.minecraft.ChatLine;
 import com.mojang.minecraft.Minecraft;
 import com.mojang.minecraft.level.tile.Tile;
-import com.mojang.minecraft.net.ConnectionManager;
-import com.mojang.minecraft.net.NetworkPlayer;
 import com.mojang.minecraft.player.Inventory;
 import com.mojang.minecraft.renderer.Tesselator;
 import com.mojang.minecraft.renderer.Textures;
@@ -99,44 +97,6 @@ public final class InGameHud extends Gui {
 		var6.vertex((float)(var10 + 5), (float)(var11 + 1), 0.0F);
 		var6.end();
 		this.hoveredUsername = null;
-		if(Keyboard.isKeyDown(Keyboard.KEY_TAB) && this.minecraft.connectionManager != null && this.minecraft.connectionManager.isConnected()) {
-			ConnectionManager var12 = this.minecraft.connectionManager;
-			ArrayList var15 = new ArrayList();
-			var15.add(var12.minecraft.user.name);
-			Iterator var13 = var12.players.values().iterator();
-
-			while(var13.hasNext()) {
-				NetworkPlayer var20 = (NetworkPlayer)var13.next();
-				var15.add(var20.name);
-			}
-
-			ArrayList var14 = var15;
-			GL11.glEnable(GL11.GL_BLEND);
-			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			GL11.glBegin(GL11.GL_QUADS);
-			GL11.glColor4f(0.0F, 0.0F, 0.0F, 0.7F);
-			GL11.glVertex2f((float)(var10 + 128), (float)(var11 - 68 - 12));
-			GL11.glVertex2f((float)(var10 - 128), (float)(var11 - 68 - 12));
-			GL11.glColor4f(0.2F, 0.2F, 0.2F, 0.8F);
-			GL11.glVertex2f((float)(var10 - 128), (float)(var11 + 68));
-			GL11.glVertex2f((float)(var10 + 128), (float)(var11 + 68));
-			GL11.glEnd();
-			GL11.glDisable(GL11.GL_BLEND);
-			String var16 = "Connected players:";
-			var4.drawShadow(var16, var10 - var4.width(var16) / 2, var11 - 64 - 12, 16777215);
-
-			for(int var17 = 0; var17 < var14.size(); ++var17) {
-				var8 = var10 + var17 % 2 * 120 - 120;
-				var9 = var11 - 64 + (var17 / 2 << 3);
-				if(var1 && var2 >= var8 && var3 >= var9 && var2 < var8 + 120 && var3 < var9 + 8) {
-					this.hoveredUsername = (String)var14.get(var17);
-					var4.draw((String)var14.get(var17), var8 + 2, var9, 16777215);
-				} else {
-					var4.draw((String)var14.get(var17), var8, var9, 15658734);
-				}
-			}
-		}
-
 	}
 
 	public final void addChatMessage(String var1) {

@@ -10,8 +10,8 @@ import org.teavm.jso.core.JSError;
 import org.teavm.jso.dom.html.HTMLElement;
 
 import net.PeytonPlayz585.opengl.LWJGLMain;
-import net.minecraft.src.Minecraft;
-import net.minecraft.src.Session;
+import com.mojang.minecraft.Minecraft;
+import com.mojang.minecraft.User;
 
 public class Client {
 	
@@ -62,9 +62,9 @@ public class Client {
 	}
 	
 	public static void run0() {
-		instance = new Minecraft(Display.getDisplayMode().getWidth(), Display.getDisplayMode().getHeight(), false);
-		instance.session = new Session("Player", "fuckmojang123");
-		instance.session.mpPassParameter = "randpasslol";
+		instance = new Minecraft(Display.getWidth(), Display.getHeight());
+		instance.user = new User("Player", "webgl");
+		instance.user.mpPass = "NTrYpeNT"; //Random generated password
 		mcThread = new Thread(instance, "Minecraft main thread");
 		mcThread.start();
 	}

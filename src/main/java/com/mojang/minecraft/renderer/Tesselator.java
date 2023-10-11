@@ -36,6 +36,11 @@ public class Tesselator {
 	 */
 	private boolean hasTexture = false;
 
+	/**
+	 * Whether the current draw object for this tessellator has normal values.
+	 */
+	private boolean hasNormals = false;
+
 	/** The index into the raw buffer to be used for the next data. */
 	private int rawBufferIndex = 0;
 
@@ -77,6 +82,9 @@ public class Tesselator {
 	private int bufferSize;
 	
 	private int drawMode;
+
+	/** The normal to be applied to the face being drawn. */
+	private int normal;
 
 	private Tesselator(int par1) {
 		this.bufferSize = par1;
@@ -148,6 +156,7 @@ public class Tesselator {
 		this.drawMode = 7;
 		this.isDrawing = true;
 		this.reset();
+		this.hasNormals = false;
 		this.hasColor = false;
 		this.hasTexture = false;
 		this.isColorDisabled = false;
@@ -155,9 +164,6 @@ public class Tesselator {
 
 	public void begin(int drawMode) {
 		this.drawMode = drawMode;
-		if (this.isDrawing) {
-			this.draw();
-		}
 		this.isDrawing = true;
 		this.reset();
 		this.hasColor = false;
@@ -178,29 +184,29 @@ public class Tesselator {
 	 * Sets the RGB values as specified, converting from floats between 0 and 1 to
 	 * integers from 0-255.
 	 */
-	public void setColorOpaque_F(float par1, float par2, float par3) {
-		this.setColorOpaque((int) (par1 * 255.0F), (int) (par2 * 255.0F), (int) (par3 * 255.0F));
+	public void color(float par1, float par2, float par3) {
+		this.color((int) (par1 * 255.0F), (int) (par2 * 255.0F), (int) (par3 * 255.0F));
 	}
 
 	/**
 	 * Sets the RGBA values for the color, converting from floats between 0 and 1 to
 	 * integers from 0-255.
 	 */
-	public void setColorRGBA_F(float par1, float par2, float par3, float par4) {
-		this.setColorRGBA((int) (par1 * 255.0F), (int) (par2 * 255.0F), (int) (par3 * 255.0F), (int) (par4 * 255.0F));
+	public void color(float par1, float par2, float par3, float par4) {
+		this.color((int) (par1 * 255.0F), (int) (par2 * 255.0F), (int) (par3 * 255.0F), (int) (par4 * 255.0F));
 	}
 
 	/**
 	 * Sets the RGB values as specified, and sets alpha to opaque.
 	 */
 	public void color(int par1, int par2, int par3) {
-		this.setColorRGBA(par1, par2, par3, 255);
+		this.color(par1, par2, par3, 255);
 	}
 
 	/**
 	 * Sets the RGBA values for the color. Also clamps them to 0-255.
 	 */
-	public void setColorRGBA(int par1, int par2, int par3, int par4) {
+	public void color(int par1, int par2, int par3, int par4) {
 		if (!this.isColorDisabled) {
 			if (par1 > 255) {
 				par1 = 255;
@@ -244,7 +250,7 @@ public class Tesselator {
 	 */
 	public void vertexUV(double par1, double par3, double par5, double par7, double par9) {
 		this.setTextureUV(par7, par9);
-		this.addVertex(par1, par3, par5);
+		this.vertex(par1, par3, par5);
 	}
 
 	/**
@@ -273,6 +279,10 @@ public class Tesselator {
 			intBuffer0.set(bufferIndex + 5, this.color);
 		}
 
+		if (this.hasNormals) {
+			intBuffer0.set(bufferIndex + 6, this.normal);
+		}
+
 		this.rawBufferIndex += 7;
 	}
 
@@ -280,28 +290,28 @@ public class Tesselator {
 	 * Sets the color to the given opaque value (stored as byte values packed in an
 	 * integer).
 	 */
-	public void setColorOpaque_I(int par1) {
+	public void color(int par1) {
 		int var2 = par1 >> 16 & 255;
 		int var3 = par1 >> 8 & 255;
 		int var4 = par1 & 255;
-		this.setColorOpaque(var2, var3, var4);
+		this.color(var2, var3, var4);
 	}
 
 	/**
 	 * Sets the color to the given color (packed as bytes in integer) and alpha
 	 * values.
 	 */
-	public void setColorRGBA_I(int par1, int par2) {
+	public void color(int par1, int par2) {
 		int var3 = par1 >> 16 & 255;
 		int var4 = par1 >> 8 & 255;
 		int var5 = par1 & 255;
-		this.setColorRGBA(var3, var4, var5, par2);
+		this.color(var3, var4, var5, par2);
 	}
 
 	/**
 	 * Disables colors for the current draw call.
 	 */
-	public void disableColor() {
+	public void noColor() {
 		this.isColorDisabled = true;
 	}
 
@@ -309,7 +319,12 @@ public class Tesselator {
 	 * Sets the normal for the current draw call.
 	 */
 	public void setNormal(float par1, float par2, float par3) {
-		GL11.glNormal3f(par1, par2, par3);
+		this.hasNormals = true;
+		float len = (float) Math.sqrt(par1 * par1 + par2 * par2 + par3 * par3);
+		int var4 = (int)((par1 / len) * 127.0F) + 127;
+		int var5 = (int)((par2 / len) * 127.0F) + 127;
+		int var6 = (int)((par3 / len) * 127.0F) + 127;
+		this.normal = var4 & 255 | (var5 & 255) << 8 | (var6 & 255) << 16;
 	}
 
 	/**

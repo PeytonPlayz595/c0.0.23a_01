@@ -1,6 +1,7 @@
 package com.mojang.minecraft.character;
 
 import org.lwjgl.opengl.GL11;
+import com.mojang.minecraft.renderer.Tesselator;
 
 public final class Cube {
 	private Vertex[] vertices;
@@ -63,7 +64,8 @@ public final class Cube {
 			Cube var2 = this;
 			this.list = GL11.glGenLists(1);
 			GL11.glNewList(this.list, GL11.GL_COMPILE);
-			GL11.glBegin(GL11.GL_QUADS);
+			Tesselator tesselator = Tesselator.instance;
+			tesselator.begin(GL11.GL_QUADS);
 
 			for(int var4 = 0; var4 < var2.polygons.length; ++var4) {
 				Polygon var10000 = var2.polygons[var4];
@@ -72,16 +74,16 @@ public final class Cube {
 				Vec3 var7 = var5.vertices[1].pos.subtract(var5.vertices[0].pos).normalize();
 				Vec3 var8 = var5.vertices[1].pos.subtract(var5.vertices[2].pos).normalize();
 				var7 = (new Vec3(var7.y * var8.z - var7.z * var8.y, var7.z * var8.x - var7.x * var8.z, var7.x * var8.y - var7.y * var8.x)).normalize();
-				GL11.glNormal3f(var7.x, var7.y, var7.z);
+				tesselator.setNormal(var7.x, var7.y, var7.z);
 
 				for(int var10 = 0; var10 < 4; ++var10) {
 					Vertex var11 = var5.vertices[var10];
-					GL11.glTexCoord2f(var11.u / 64.0F, var11.v / 32.0F);
-					GL11.glVertex3f(var11.pos.x * var6, var11.pos.y * var6, var11.pos.z * var6);
+					tesselator.setTextureUV(var11.u / 64.0F, var11.v / 32.0F);
+					tesselator.vertex(var11.pos.x * var6, var11.pos.y * var6, var11.pos.z * var6);
 				}
 			}
 
-			GL11.glEnd();
+			tesselator.end();
 			GL11.glEndList();
 			var2.compiled = true;
 		}

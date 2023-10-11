@@ -60,7 +60,6 @@ import org.teavm.jso.websocket.WebSocket;
 import net.PeytonPlayz585.io.IndexedDBFilesystem;
 import net.PeytonPlayz585.minecraft.AssetRepository;
 import net.PeytonPlayz585.minecraft.Base64;
-import net.minecraft.src.MathHelper;
 
 import static org.teavm.jso.webgl.WebGLRenderingContext.*;
 import static net.PeytonPlayz585.opengl.WebGL2RenderingContext.*;

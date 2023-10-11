@@ -3,7 +3,6 @@ package com.mojang.minecraft;
 import com.mojang.minecraft.level.Level;
 import com.mojang.minecraft.level.liquid.Liquid;
 import com.mojang.minecraft.level.tile.Tile;
-import com.mojang.minecraft.net.PlayerMove;
 import com.mojang.minecraft.phys.AABB;
 import com.mojang.minecraft.renderer.Textures;
 import java.io.Serializable;
@@ -65,20 +64,6 @@ public class Entity implements Serializable {
 	public void setSize(float var1, float var2) {
 		this.bbWidth = var1;
 		this.bbHeight = var2;
-	}
-
-	public void setPos(PlayerMove var1) {
-		if(var1.moving) {
-			this.setPos(var1.x, var1.y, var1.z);
-		} else {
-			this.setPos(this.x, this.y, this.z);
-		}
-
-		if(var1.rotating) {
-			this.setRot(var1.yRot, var1.xRot);
-		} else {
-			this.setRot(this.yRot, this.xRot);
-		}
 	}
 
 	protected void setRot(float var1, float var2) {
@@ -191,7 +176,7 @@ public class Entity implements Serializable {
 				Tile.SoundType var12 = Tile.tiles[var11].soundType;
 				if(var12 != Tile.SoundType.none) {
 					this.walkDist -= (float)((int)this.walkDist);
-					this.playSound("step." + var12.name, var12.getVolume() * (12.0F / 16.0F), var12.getPitch());
+					//this.playSound("step." + var12.name, var12.getVolume() * (12.0F / 16.0F), var12.getPitch());
 				}
 			}
 		}
@@ -242,10 +227,6 @@ public class Entity implements Serializable {
 
 	public void setLevel(Level var1) {
 		this.level = var1;
-	}
-
-	public void playSound(String var1, float var2, float var3) {
-		this.level.playSound(var1, this, var2, var3);
 	}
 
 	public void moveTo(float var1, float var2, float var3, float var4, float var5) {
