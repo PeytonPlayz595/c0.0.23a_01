@@ -9,6 +9,7 @@ Pros:
 - No download, it's playable in your web browser for free
 <br>
 Cons:
+
 - It's technically a pirated version of the game
 - There will be unexpected bugs and glitches
 - Probably will be removed due to a DMCA
